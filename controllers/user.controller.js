@@ -25,12 +25,14 @@ export const updateUser = async(req,res)=> {
     const id = req.params.id
     const tokenUserId = req.userId;
     const {password, avatar, ...inputs} = req.body;
-
-    if(id!=tokenUserId) {
+    
+    if(id!==tokenUserId) {
         return res.status(403).json({message: "Not recognised!"})
     }
-    let updatedPassword = null;
+    console.log("password is shown here >>>>>>>>>>>>>", password);
     try {
+        let updatedPassword = null;
+        console.log("password is not shown here >>>>>>>>>>>>>", password);
         if(password) {
             updatedPassword = await bcrypt.hash(password,10);
         }
@@ -42,7 +44,7 @@ export const updateUser = async(req,res)=> {
                 ...(avatar && {avatar})
             },
         })
-        const {password, ...other} = updatedUser;
+        const {password: userPassword, ...other} = updatedUser;
         console.log(other);
         res.status(200).json(other)
     }catch(err) {
