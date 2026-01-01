@@ -1,12 +1,10 @@
 import prisma from "../lib/prisma.js";
 
-
-
 export const getPosts = async (req, res)=> {
     try {
 
         const posts = await prisma.post.findMany()
-        res.status(200).json()
+        res.status(200).json(posts)
     }catch(err) {
         console.log(err);
         res.status(500).json({
@@ -16,7 +14,7 @@ export const getPosts = async (req, res)=> {
 }
 
 export const getPost = async (req, res)=> {
-    const id = req.params
+    const id = req.params.id
     try {
 
         const post = await prisma.post.findUnique({
@@ -40,6 +38,9 @@ export const addPost = async (req, res)=> {
             data: {
                 ...body,
                 userId: tokenUserId,
+                postDetail: {
+                    create: body.postDetail
+                }
             }
         })
 
