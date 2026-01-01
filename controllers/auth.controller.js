@@ -5,11 +5,11 @@ import "dotenv/config";
 
 const register = async (req, res) => {
   const { username, email, password } = req.body;
-  console.log("REGISTERRRRRRRRR", req.body);
+  // console.log("REGISTERRRRRRRRR", req.body);
   
   try {
     const encryptedPassword = await bcrypt.hash(password, 10);
-    console.log("CN ENCRYPTED PASSWORD", encryptedPassword);
+    // console.log("CN ENCRYPTED PASSWORD", encryptedPassword);
 
     const newUser = await prisma.user.create({
       data: {
@@ -27,7 +27,7 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  console.log("Login controller");
+  // console.log("Login controller");
   const { email, password } = req.body;
   try {
     const user = await prisma.user.findUnique({
