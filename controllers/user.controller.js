@@ -29,10 +29,8 @@ export const updateUser = async(req,res)=> {
     if(id!==tokenUserId) {
         return res.status(403).json({message: "Not recognised!"})
     }
-    console.log("password is shown here >>>>>>>>>>>>>", password);
     try {
         let updatedPassword = null;
-        console.log("password is not shown here >>>>>>>>>>>>>", password);
         if(password) {
             updatedPassword = await bcrypt.hash(password,10);
         }
@@ -45,7 +43,7 @@ export const updateUser = async(req,res)=> {
             },
         })
         const {password: userPassword, ...other} = updatedUser;
-        console.log(other);
+        // console.log(other);
         res.status(200).json(other)
     }catch(err) {
         console.log(err)

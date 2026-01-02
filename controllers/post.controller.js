@@ -65,7 +65,7 @@ export const addPost = async (req, res)=> {
                 }
             }
         })
-        console.log("NEWWWWW POSTTTTTTTTTTTTTT", newPost);
+        // console.log("NEWWWWW POSTTTTTTTTTTTTTT", newPost);
         
 
         res.status(200).json(newPost)

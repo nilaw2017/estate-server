@@ -5,7 +5,6 @@ export const verifyToken = (req, res, next)=>{
 
     if(!token) {
         console.log("No token found");
-        console.log("CN NO TOKEN FOUND");
         
         return res.status(401).json({message:"Not Authenticated!"});
     }
