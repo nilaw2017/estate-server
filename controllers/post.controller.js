@@ -2,10 +2,10 @@ import prisma from "../lib/prisma.js";
 
 export const getPosts = async (req, res)=> {
     const query = req.query;
-    // console.log("getposts query", query);
+    console.log("getposts query", query);
     
     try {
-        const posts = await prisma.post.findMany({
+        const posts = await prisma.post.findMany({ 
             where:{
                 city: query.city || undefined,
                 type: query.type || undefined,

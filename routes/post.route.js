@@ -10,3 +10,4 @@ router.put("/:id", verifyToken, updatePost);
 router.delete("/:id", verifyToken, deletePost);
 
 export default router;
+    
