@@ -62,3 +62,39 @@ export const deleteUser = async(req,res)=> {
         res.status(500).json({message:"Unable to delete user!"})
     }
 }
+
+export const savePost = async(req,res)=> {
+    const postId = req.body.postId;
+    const tokenUserId = req.userId;
+
+    try {
+        const savedPost = await prisma.savedPost.findUnique({
+            where:{
+                userId_postId:{
+                    userId:tokenUserId,
+                    postId
+                }
+            }
+        })
+
+        if(savePost){
+            await prisma.savedPost.delete({
+                where: {
+                    id: savedPost.id
+                }
+            })
+            res.status(200).json({message:"Post Removed from saved list"})
+        } else {
+            await prisma.savedPost.create({
+                data: {
+                    userId: tokenUserId,
+                    postId
+                }
+            })
+            res.status(200).json({message:"Post Added to saved list"})
+        }
+    }catch(err){
+        console.log(err)
+        res.status(500).json({message:"Unable to delete user!"})
+    }
+}
